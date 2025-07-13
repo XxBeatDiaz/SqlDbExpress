@@ -1,10 +1,13 @@
-import mysql from 'mysql2/promise';
+import express from 'express';
+import router from './routes/questionsRoutes.js';
 
-const pool = mysql.createPool({
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || root,
-  password: '',
-  database: 'riddles',
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+
+app.use('/', router)
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
-
-export default pool;
